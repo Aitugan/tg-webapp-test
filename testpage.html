@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Incident</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="text"],
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-group input[type="radio"] {
+            margin-right: 10px;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .form-group button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .form-group button:hover {
+            background-color: #218838;
+        }
+    </style>
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const statusId = getQueryParam('start');
+            const heading = document.querySelector('h1');
+            if (statusId) {
+                heading.textContent = `Вы хотите отметить инцидент ${statusId} ложным. Укажите причины:`;
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Вы хотите отметить инцидент 1004756382 ложным. Укажите причины:</h1>
+        <form>
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="reason" value="schedule_conflict"> Ошибка оборудования
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="reason" value="feeling_unwell"> Неверное отображение в КХД
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="reason" value="personal_emergency"> Неверный маршрут
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="reason" value="other"> Другое
+                </label>
+                <textarea name="other_reason" rows="3" placeholder="Опишите причину"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit">Отправить</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
